@@ -3,16 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/MSI/Desktop/RFID/src/GUI/Input.java</file>
-            <file>file:/C:/Users/MSI/Desktop/RFID/src/GUI/Product_GUI.java</file>
-            <file>file:/C:/Users/MSI/Desktop/RFID/src/Build/ReadTas_Inventory.java</file>
-            <file>file:/C:/Users/MSI/Desktop/RFID/src/GUI/DN.java</file>
-            <file>file:/C:/Users/MSI/Desktop/RFID/src/Build/Build.java</file>
-            <file>file:/C:/Users/MSI/Desktop/RFID/src/Build/Test.java</file>
-            <file>file:/C:/Users/MSI/Desktop/RFID/src/GUI/Order_Detail.java</file>
-            <file>file:/C:/Users/MSI/Desktop/RFID/src/GUI/Main.java</file>
-            <file>file:/C:/Users/MSI/Desktop/RFID/src/TagReportListenerImplementation/MyTagReportListener.java</file>
-            <file>file:/C:/Users/MSI/Desktop/RFID/src/TagReportListenerImplementation/MyTagReportListener1.java</file>
+            <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/Input.java</file>
+            <file>file:/C:/Users/MSI/WarehouseRFID/src/TagReportListenerImplementation/MyTagReportListener.java</file>
+            <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/DN.java</file>
         </group>
     </open-files>
 </project-private>

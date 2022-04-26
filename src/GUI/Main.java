@@ -162,14 +162,20 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Product_GUI a=new Product_GUI();
+        Product_GUI a = new Product_GUI();
         a.setVisible(true);
         a.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Input a =new Input();
-        a.scan();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Input a = new Input();
+                a.scan();
+            }
+        }).start();
+
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -234,19 +240,19 @@ public class Main extends javax.swing.JFrame {
 //        }
 //            }
 //        }).start();
-    
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Order_GUI a=new Order_GUI();
+        Order_GUI a = new Order_GUI();
         a.setVisible(true);
         a.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btn_TagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TagActionPerformed
-            Input1 a=new Input1();
-            a.scan2();
-        
+        Input1 a = new Input1();
+        a.scan2();
+
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -314,13 +320,13 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_TagActionPerformed
 
     private void btn_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportActionPerformed
-       ReportGUI a=new ReportGUI();
-       a.setVisible(true);
-       a.setLocationRelativeTo(null);
+        ReportGUI a = new ReportGUI();
+        a.setVisible(true);
+        a.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_reportActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
-        DN a=new DN();
+        DN a = new DN();
         a.setVisible(true);
         a.setLocationRelativeTo(null);
         dispose();

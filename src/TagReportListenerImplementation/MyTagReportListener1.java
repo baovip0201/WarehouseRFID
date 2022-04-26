@@ -15,6 +15,7 @@ import com.impinj.octane.TagReport;
 import com.impinj.octane.TagReportListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MyTagReportListener1 implements TagReportListener{
     public static Set<RFID> scan=new HashSet<>();
-    public static Set<String> tempList;
+    public static Set<String> tempList=new HashSet<>();
     Tag_BUS tagBUS = new Tag_BUS();
 
     public MyTagReportListener1() {
@@ -64,19 +65,20 @@ public class MyTagReportListener1 implements TagReportListener{
                         RFID v = entry.getValue();
                         Order_Detail.model1.addRow(new Object[]{k, v.getDate(), v.getGate()});
                         //Order_Detail.tbl_scan.setModel(Order_Detail.model1);
-                        //tempList.add(k);
+                        tempList.add(k);
                         
                     }
 
                 }
                 //show();
-                //showProduct();
+                showProduct();
             
         
 
     }
 
     private void showProduct() {
+        Order_Detail.map=new HashMap<>();
         Order_Detail.model2.setRowCount(0);
         for (String ls : tempList) {
             String element = tagBUS.query_product_id(ls);

@@ -70,7 +70,7 @@ public class Input1 {
     
     List<String> getTags(){
         List<String> list=new ArrayList<>();
-        for(int i=0;i<30;i++){
+        for(int i=30;i<50;i++){
             list.add("300F 4FB7 3AD0 01C0 8369 A"+i);
         }
                       
