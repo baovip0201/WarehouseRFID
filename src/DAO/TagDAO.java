@@ -8,7 +8,6 @@ package DAO;
 import static DAO.OrderdetailDAO.conn;
 import static DAO.OrderdetailDAO.ps;
 import static DAO.OrderdetailDAO.rs;
-import DTO.Khoa;
 import DTO.Order;
 import DTO.Product;
 import DTO.Tag;

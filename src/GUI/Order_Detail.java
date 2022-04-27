@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import BUS.OrderBUS;
 import BUS.OrderdetailBUS;
 import BUS.ProductBUS;
 import BUS.Tag_BUS;
@@ -12,6 +13,7 @@ import DTO.Orderdetail;
 import DTO.Order;
 import DTO.Product;
 import DTO.RFID;
+import DTO.Test;
 import static GUI.TagRFID.listScan;
 import static GUI.TagRFID.model;
 import TagReportListenerImplementation.MyTagReportListener1;
@@ -25,6 +27,8 @@ import com.impinj.octane.ReaderMode;
 import com.impinj.octane.ReportConfig;
 import com.impinj.octane.ReportMode;
 import com.impinj.octane.Settings;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -34,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import javax.swing.Action;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -53,6 +58,7 @@ public class Order_Detail extends javax.swing.JFrame {
     Tag_BUS tagBUS=new Tag_BUS();
     TagRFID tagrfid=new TagRFID();
     Set<String> tempList=new HashSet<>();
+    OrderBUS bus1=new OrderBUS();
     public static Map<String, Integer> map;
     public static Map<String, RFID> map1=new HashMap<>();
     public static Map<String, RFID> map2=new HashMap<>();
@@ -66,6 +72,7 @@ public class Order_Detail extends javax.swing.JFrame {
         //showProduct();
         getCb_Box_Order();
         //getCb_Box_Product();
+        
     }
     private void showD(){
         dList=bus.getListV();
@@ -83,6 +90,9 @@ public class Order_Detail extends javax.swing.JFrame {
         }
         
      }
+    
+    
+   
     
 
     private void showProduct(){
@@ -137,6 +147,7 @@ public class Order_Detail extends javax.swing.JFrame {
         btnScan = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cbb_order_id = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -250,7 +261,7 @@ public class Order_Detail extends javax.swing.JFrame {
                 btn_refreshActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 120, 50));
+        jPanel2.add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 50));
 
         btnThemDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnThemDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_save_20px.png"))); // NOI18N
@@ -260,7 +271,7 @@ public class Order_Detail extends javax.swing.JFrame {
                 btnThemDiemActionPerformed(evt);
             }
         });
-        jPanel2.add(btnThemDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 130, 50));
+        jPanel2.add(btnThemDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 100, 50));
 
         btnXoaDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnXoaDiem.setForeground(new java.awt.Color(51, 51, 51));
@@ -272,7 +283,7 @@ public class Order_Detail extends javax.swing.JFrame {
                 btnXoaDiemActionPerformed(evt);
             }
         });
-        jPanel2.add(btnXoaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 120, 50));
+        jPanel2.add(btnXoaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, 50));
 
         btnSuaDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSuaDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_update_20px_1.png"))); // NOI18N
@@ -282,7 +293,7 @@ public class Order_Detail extends javax.swing.JFrame {
                 btnSuaDiemActionPerformed(evt);
             }
         });
-        jPanel2.add(btnSuaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 130, 50));
+        jPanel2.add(btnSuaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 100, 50));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_exit_20px.png"))); // NOI18N
@@ -292,7 +303,7 @@ public class Order_Detail extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 130, 50));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 90, 50));
 
         btnScan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnScan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_calculator_30px.png"))); // NOI18N
@@ -302,7 +313,7 @@ public class Order_Detail extends javax.swing.JFrame {
                 btnScanActionPerformed(evt);
             }
         });
-        jPanel2.add(btnScan, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 130, 50));
+        jPanel2.add(btnScan, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 120, 50));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -311,7 +322,20 @@ public class Order_Detail extends javax.swing.JFrame {
 
         cbb_order_id.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cbb_order_id.setForeground(new java.awt.Color(51, 51, 51));
+        cbb_order_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbb_order_idActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbb_order_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 204, -1));
+
+        jButton2.setText("Check");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 80, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 84, 540, 190));
 
@@ -383,6 +407,41 @@ public class Order_Detail extends javax.swing.JFrame {
         map=new HashMap<>();
     }//GEN-LAST:event_btn_refreshActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        List<Test> products=new ArrayList<>();
+        products=bus.getListProductID(cbb_order_id.getSelectedItem().toString());
+        for(Test t: products){
+            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                    String k = entry.getKey();
+                    int v = entry.getValue();
+                    //System.out.println("Map: "+k + ": " + v);
+                    if(k.equals(t.getProduct_id())){
+                        if(v==Integer.parseInt(t.getQty())){
+                            System.out.println("Product ID "+t.getProduct_id()+" Đã đủ số lượng trong hóa đơn!!!");
+                            bus1.updateStatus(cbb_order_id.getSelectedItem().toString());
+                        }else if(v<Integer.parseInt(t.getQty())){
+                            System.out.println("Product ID"+t.getProduct_id()+" chưa đủ số lượng trong hóa đơn!!!");
+                        }else if(v>Integer.parseInt(t.getQty())){
+                            System.out.println("Product ID"+t.getProduct_id()+" thừa số lượng trong hóa đơn!!!");
+                        }
+                    }else if(!k.contains(t.getProduct_id())){
+                        System.out.println(k+" khong co trong hóa đơn");
+                    }
+                }
+            //System.out.println(t.getProduct_id()+": "+t.getQty());
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cbb_order_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_order_idActionPerformed
+        List<Test> products=new ArrayList<>();
+        products=bus.getListProductID(cbb_order_id.getSelectedItem().toString());
+        model.setRowCount(0);
+        for(Test t: products){
+            model.addRow(new Object[] {cbb_order_id.getSelectedItem().toString(),t.getProduct_id(),t.getQty()});
+        }
+    }//GEN-LAST:event_cbb_order_idActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -416,6 +475,7 @@ public class Order_Detail extends javax.swing.JFrame {
     private javax.swing.JButton btn_refresh;
     private javax.swing.JComboBox<String> cbb_order_id;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

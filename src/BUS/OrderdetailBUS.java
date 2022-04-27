@@ -10,6 +10,7 @@ import DTO.Orderdetail;
 import DTO.Order;
 import DTO.Product;
 import DTO.Report;
+import DTO.Test;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
 public class OrderdetailBUS {
     public List<Orderdetail> dsd;
     public List<Report> report;
+    public List<Test> list;
     OrderdetailDAO data = new OrderdetailDAO();
     public OrderdetailBUS(){
         
@@ -65,5 +67,10 @@ public class OrderdetailBUS {
         if(report==null) report=new ArrayList<>();
         report=data.report(from, to);
         return report;
+    }
+     public List<Test> getListProductID(String orderId){
+        if(list==null) list=new ArrayList<>();
+        list=data.getProductID(orderId);
+        return list;
     }
 }

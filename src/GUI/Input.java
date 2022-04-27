@@ -67,7 +67,7 @@ public class Input {
                 System.out.println(k);
             }
             try {
-                Thread.sleep(500);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Input1.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -125,7 +125,7 @@ public class Input {
                 for (Map.Entry<String, Integer> entry : Order_Detail.map.entrySet()) {
                     String k = entry.getKey();
                     int v = entry.getValue();
-                    System.out.println(k + " + " + v);
+                    //System.out.println(k + " + " + v);
                     Order_Detail.model2.addRow(new Object[]{k, v});
                 }
     

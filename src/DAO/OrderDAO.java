@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import DTO.Khoa;
 import DTO.Order;
 import DTO.Product;
 import java.sql.Connection;
@@ -88,6 +87,15 @@ public class OrderDAO {
         } catch (SQLException e) {
         }
         return false;
+    }
+    public void updateStatus(String id){
+        String sql="update db_order set status='3' where order_id='"+id+"'";
+        try {
+            ps=conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Lỗi");
+        }
     }
 
 }

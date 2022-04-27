@@ -40,4 +40,7 @@ public class OrderBUS {
     public void xoa(Order tv){
         data.xoa(tv);
     }
+    public void updateStatus(String id){
+        data.updateStatus(id);
+    }
 }

@@ -6,7 +6,6 @@
 package GUI;
 
 import BUS.ProductBUS;
-import DTO.Khoa;
 import Lib.Help;
 import java.util.ArrayList;
 import java.util.List;

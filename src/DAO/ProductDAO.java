@@ -6,7 +6,6 @@
 package DAO;
 
 
-import DTO.Khoa;
 import DTO.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -89,21 +88,6 @@ public class ProductDAO {
         }
         return false;
     }
-    public List<Khoa> fill_cbb(){
-        List<Khoa> kList = new ArrayList<>();
-        try {
-        String sql = "select * from khoa";
-        ps = conn.prepareStatement(sql);
-        rs=ps.executeQuery();
-            while(rs.next()){
-                Khoa k = new Khoa(rs.getString("MAKHOA"));
-                kList.add(k);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Lỗi");
-        }
-        return kList;
-    }
+   
     
 }

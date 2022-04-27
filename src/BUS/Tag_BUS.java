@@ -7,7 +7,7 @@ package BUS;
 
 import DAO.ProductDAO;
 import DAO.TagDAO;
-import DTO.Khoa;
+
 import DTO.Product;
 import DTO.Tag;
 import java.util.ArrayList;

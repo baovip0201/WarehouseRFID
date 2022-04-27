@@ -6,7 +6,6 @@
 package BUS;
 
 import DAO.ProductDAO;
-import DTO.Khoa;
 import DTO.Product;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +40,5 @@ public class ProductBUS {
     public void xoa(Product tv){
         data.xoa(tv);
     }
-    public List<Khoa> fill_cbb() {
-        List<Khoa> list = new ArrayList<>();
-        list = data.fill_cbb();
-        return list;
-    }
+
 }

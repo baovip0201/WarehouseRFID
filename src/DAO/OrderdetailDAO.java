@@ -7,10 +7,10 @@ package DAO;
 
 
 import DTO.Orderdetail;
-import DTO.Khoa;
 import DTO.Order;
 import DTO.Product;
 import DTO.Report;
+import DTO.Test;
 import GUI.ReportGUI;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -158,6 +158,7 @@ public class OrderdetailDAO {
         try{
             String sql="select orderdetail.order_id, orderdetail.product_id, product_name, orderdetail.quanity from "
                     + "product, orderdetail, db_order where product.product_id=orderdetail.product_id and orderdetail.order_id= db_order.order_id"
+                    + " and db_order.status='3'"
                     + " and order_date between '"+from+"' and '"+to+"'";
             
             ps=conn.prepareStatement(sql);
@@ -173,5 +174,20 @@ public class OrderdetailDAO {
             
         }
         return list;
+    }
+    public List<Test> getProductID(String orderId){
+        List<Test> kq=new ArrayList<>();
+        try {
+            String sql="select * from orderdetail where order_id='"+orderId+"'";
+            ps=conn.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                String product_id=rs.getString("product_id");
+                String qty=rs.getString("quanity");
+                kq.add(new Test(product_id, qty));
+            }
+        } catch (Exception e) {
+        }
+       return kq;
     }
 }
