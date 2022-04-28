@@ -140,9 +140,9 @@ public class InventoryGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btn_refresh = new javax.swing.JButton();
-        btnThemDiem = new javax.swing.JButton();
-        btnXoaDiem = new javax.swing.JButton();
-        btnSuaDiem = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnScan = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -263,37 +263,37 @@ public class InventoryGUI extends javax.swing.JFrame {
         });
         jPanel2.add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 50));
 
-        btnThemDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnThemDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_save_20px.png"))); // NOI18N
-        btnThemDiem.setText("Save");
-        btnThemDiem.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_save_20px.png"))); // NOI18N
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemDiemActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
-        jPanel2.add(btnThemDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 100, 50));
+        jPanel2.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 100, 50));
 
-        btnXoaDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnXoaDiem.setForeground(new java.awt.Color(51, 51, 51));
-        btnXoaDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_delete_20px.png"))); // NOI18N
-        btnXoaDiem.setText("Delete");
-        btnXoaDiem.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnXoaDiem.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(51, 51, 51));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_delete_20px.png"))); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaDiemActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
-        jPanel2.add(btnXoaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, 50));
+        jPanel2.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, 50));
 
-        btnSuaDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSuaDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_update_20px_1.png"))); // NOI18N
-        btnSuaDiem.setText("Update");
-        btnSuaDiem.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_update_20px_1.png"))); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaDiemActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
-        jPanel2.add(btnSuaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, 50));
+        jPanel2.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, 50));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_exit_20px.png"))); // NOI18N
@@ -344,7 +344,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDiemActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         Orderdetail tv = new Orderdetail();
         for(Map.Entry<String, Integer> entry: map.entrySet()){
             String k=entry.getKey();
@@ -353,16 +353,16 @@ public class InventoryGUI extends javax.swing.JFrame {
                 tv.setProduct_id(k);
                 tv.setQuanity(v);
                 bus.them(tv); 
-                tagBUS.updateTag(tv.getProduct_id(), cbb_order_id.getSelectedItem().toString());
+                //tagBUS.updateTag(tv.getProduct_id(), cbb_order_id.getSelectedItem().toString());
                 
         }              
                 bus1.updateStatus(cbb_order_id.getSelectedItem().toString());
                 JOptionPane.showMessageDialog(rootPane, "Đã thêm");
                 tbl_orderdetail.setModel(model);
                 showD();
-    }//GEN-LAST:event_btnThemDiemActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void btnSuaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDiemActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int i = tbl_orderdetail.getSelectedRow();
         String dk=(tbl_orderdetail.getValueAt(i, 0).toString());
         String dk1=(tbl_orderdetail.getValueAt(i, 1).toString());
@@ -371,9 +371,9 @@ public class InventoryGUI extends javax.swing.JFrame {
         bus.sua(tv,dk,dk1);
         JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
         showD();
-    }//GEN-LAST:event_btnSuaDiemActionPerformed
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void btnXoaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDiemActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int i = tbl_orderdetail.getSelectedRow();
        
         Orderdetail tv = bus.dsd.get(i);
@@ -387,7 +387,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         showD();
         
         }
-    }//GEN-LAST:event_btnXoaDiemActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tbl_orderdetailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_orderdetailKeyPressed
         // TODO add your handling code here:
@@ -488,10 +488,10 @@ public class InventoryGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnScan;
-    private javax.swing.JButton btnSuaDiem;
-    private javax.swing.JButton btnThemDiem;
-    private javax.swing.JButton btnXoaDiem;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btn_refresh;
     private javax.swing.JComboBox<String> cbb_order_id;
     private javax.swing.JButton jButton1;

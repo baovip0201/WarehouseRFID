@@ -81,7 +81,7 @@ public class TagDAO {
         return dssv;    
     }
     public static boolean CheckPrimaryKey(String txt){
-        String sql="Select * from ThongTinNhanVien where maNV='"+txt+"'";
+        String sql="Select * from tag_rfid where tag_id='"+txt+"'";
         try {
             ps=conn.prepareStatement(sql);
             rs=ps.executeQuery();
@@ -141,4 +141,5 @@ public class TagDAO {
             e.printStackTrace();
         }
     }
+    
 }

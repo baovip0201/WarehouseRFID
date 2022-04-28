@@ -5,11 +5,12 @@
         <group>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/Input1.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/BUS/ProductBUS.java</file>
-            <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/Order_Detail.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/Order_GUI.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/DAO/ProductDAO.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/DTO/Product.java</file>
+            <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/InventoryGUI.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/Main.java</file>
+            <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/OrderDetailGUI.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/ReportGUI.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/TagReportListenerImplementation/MyTagReportListener.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/Product_GUI.java</file>
@@ -22,6 +23,7 @@
             <file>file:/C:/Users/MSI/WarehouseRFID/src/DAO/OrderDAO.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/DAO/OrderdetailDAO.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/BUS/OrderdetailBUS.java</file>
+            <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/TagRFID.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/GUI/Input.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/TagReportListenerImplementation/MyTagReportListener1.java</file>
             <file>file:/C:/Users/MSI/WarehouseRFID/src/DAO/TagDAO.java</file>

@@ -457,9 +457,9 @@ public class TagRFID extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Đã thêm");
         tbl_tag.setModel(model1);
         showD();
-
-        model.removeRow(i);
         map.remove(tbl_tag_rfid.getModel().getValueAt(i, 0).toString());
+        model.removeRow(i);
+        System.out.println(tbl_tag_rfid.getModel().getValueAt(i, 0).toString());
     }//GEN-LAST:event_txt_saveActionPerformed
 
     private void tbl_tagMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tagMouseClicked

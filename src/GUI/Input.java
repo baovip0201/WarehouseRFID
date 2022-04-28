@@ -6,6 +6,7 @@
 package GUI;
 
 import BUS.Tag_BUS;
+import DAO.TagDAO;
 import DTO.RFID;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +41,7 @@ public class Input {
 
     List<String> getTags() {
         List<String> list = new ArrayList<>();
-        for (int i = 21; i < 51; i++) {
+        for (int i = 0; i < 60; i++) {
             list.add("300F 4FB7 3AD0 01C0 8369 A" + i);
         }
 //        for (int i = 30; i < 50; i++) {
@@ -72,7 +73,6 @@ public class Input {
                 InventoryGUI.tbl_scan.setModel(InventoryGUI.model1);
                 tagBUS.updateTimeScanTag(k, v.getDate());
                 tempList.add(k);
-                //System.out.println(k);
             }
             try {
                 Thread.sleep(100);
@@ -120,6 +120,7 @@ public class Input {
                 InventoryGUI.model2.setRowCount(0);
                 InventoryGUI.map = new HashMap<>();
                 for (String ls : tempList) {
+                    if(TagDAO.CheckPrimaryKey(ls)){
                     String element = tagBUS.query_product_id(ls);
 
                     System.out.println(element);
@@ -127,6 +128,9 @@ public class Input {
                         InventoryGUI.map.put(element, InventoryGUI.map.get(element) + 1);
                     } else {
                         InventoryGUI.map.put(element, 1);
+                    }
+                    }else{
+                        System.out.println("Tag ID: "+ls+" khong chua duoc dinh danh");
                     }
                 }
 

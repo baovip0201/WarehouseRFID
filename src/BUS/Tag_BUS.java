@@ -55,7 +55,7 @@ public class Tag_BUS {
         data.updateTag(dk, order_id);
     }
     public void updateTimeScanTag(String dk, String date){
-        data.updateTag(dk, date);
+        data.updateDateScan(dk, date);
     }
 
 }
