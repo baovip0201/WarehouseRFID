@@ -5,8 +5,12 @@
  */
 package DAO;
 
+import static DAO.OrderdetailDAO.conn;
+import static DAO.OrderdetailDAO.ps;
+import static DAO.OrderdetailDAO.rs;
 import DTO.Order;
 import DTO.Product;
+import DTO.Report;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -96,6 +100,29 @@ public class OrderDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Lỗi");
         }
+    }
+    
+    public List<Report> report(String from, String to){
+        List<Report> list=new ArrayList<>();
+        try{
+            String sql="select tag_rfid.order_id, tag_rfid.product_id, tag_rfid.tag_id, tag_rfid.date from "
+                    + "tag_rfid, db_order where tag_rfid.order_id= db_order.order_id"
+                    + " and db_order.status='3'"
+                    + " and order_date between '"+from+"' and '"+to+"'";
+            
+            ps=conn.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                String order_id=rs.getString("order_id");
+                String product_id=rs.getString("product_id");
+                String tag_id=rs.getString("tag_id");
+                String date=rs.getString("date");
+                list.add(new Report(order_id, product_id, tag_id, date));               
+            }
+        } catch(Exception e){
+            
+        }
+        return list;
     }
 
 }

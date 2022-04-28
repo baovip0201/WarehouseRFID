@@ -33,38 +33,46 @@ public class Input {
     Set<String> colData;
 
     public Input() {
-        Order_Detail a = new Order_Detail();
+        InventoryGUI a = new InventoryGUI();
         a.setVisible(true);
         a.setLocationRelativeTo(null);
     }
 
     List<String> getTags() {
         List<String> list = new ArrayList<>();
-        for (int i = 1; i < 29; i++) {
+        for (int i = 21; i < 51; i++) {
             list.add("300F 4FB7 3AD0 01C0 8369 A" + i);
         }
-        for (int i = 30; i < 50; i++) {
-            list.add("300F 4FB7 3AD0 01C0 8369 A" + i);
-        }
+//        for (int i = 30; i < 50; i++) {
+//            list.add("300F 4FB7 3AD0 01C0 8369 A" + i);
+//        }
+
+//            for (int i =50; i < 60; i++) {
+//            list.add("300F 4FB7 3AD0 01C0 8369 A" + i);
+//        }
+        
 
         return list;
     }
 
     public void scan() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         //tempList=new HashSet<>();
 
         for (String s : getTags()) {
-            Order_Detail.map1.put(s, new RFID("1", "1"));
-            Order_Detail.model1.setRowCount(0);
+            InventoryGUI.map1.put(s, new RFID(dtf.format(now), "1"));
+            InventoryGUI.model1.setRowCount(0);
 
-            for (Map.Entry<String, RFID> entry : Order_Detail.map1.entrySet()) {
+            for (Map.Entry<String, RFID> entry : InventoryGUI.map1.entrySet()) {
 
                 String k = entry.getKey();
                 RFID v = entry.getValue();
-                Order_Detail.model1.addRow(new Object[]{k, v.getDate(), v.getGate()});
-                Order_Detail.tbl_scan.setModel(Order_Detail.model1);
+                InventoryGUI.model1.addRow(new Object[]{k, v.getDate(), v.getGate()});
+                InventoryGUI.tbl_scan.setModel(InventoryGUI.model1);
+                tagBUS.updateTimeScanTag(k, v.getDate());
                 tempList.add(k);
-                System.out.println(k);
+                //System.out.println(k);
             }
             try {
                 Thread.sleep(100);
@@ -77,13 +85,13 @@ public class Input {
     }
 
     public void show() {
-        Order_Detail.model2.setRowCount(0);
-        Vector data = Order_Detail.model1.getDataVector();
+        InventoryGUI.model2.setRowCount(0);
+        Vector data = InventoryGUI.model1.getDataVector();
         Vector row = (Vector) data.elementAt(0);
         int mColIndex = 0;
-        Set<String> colData = new HashSet<>(Order_Detail.tbl_scan.getRowCount());
+        Set<String> colData = new HashSet<>(InventoryGUI.tbl_scan.getRowCount());
 
-        for (int i = 0; i < Order_Detail.tbl_scan.getRowCount(); i++) {
+        for (int i = 0; i < InventoryGUI.tbl_scan.getRowCount(); i++) {
             row = (Vector) data.elementAt(i);
             colData.add(row.get(mColIndex).toString());
         }
@@ -92,41 +100,41 @@ public class Input {
             System.out.println(s);
             String element = tagBUS.query_product_id(s);
 
-            if (Order_Detail.map.containsKey(element)) {
-                Order_Detail.map.put(element, Order_Detail.map.get(element) + 1);
+            if (InventoryGUI.map.containsKey(element)) {
+                InventoryGUI.map.put(element, InventoryGUI.map.get(element) + 1);
             } else {
-                Order_Detail.map.put(element, 1);
+                InventoryGUI.map.put(element, 1);
             }
         }
 
-        for (Map.Entry<String, Integer> entry : Order_Detail.map.entrySet()) {
+        for (Map.Entry<String, Integer> entry : InventoryGUI.map.entrySet()) {
             String k = entry.getKey();
             int v = entry.getValue();
             System.out.println(k + " + " + v);
-            Order_Detail.model2.addRow(new Object[]{k, v});
+            InventoryGUI.model2.addRow(new Object[]{k, v});
         }
     }
 
     private void showProduct() {
         
-                Order_Detail.model2.setRowCount(0);
-                Order_Detail.map = new HashMap<>();
+                InventoryGUI.model2.setRowCount(0);
+                InventoryGUI.map = new HashMap<>();
                 for (String ls : tempList) {
                     String element = tagBUS.query_product_id(ls);
 
                     System.out.println(element);
-                    if (Order_Detail.map.containsKey(element)) {
-                        Order_Detail.map.put(element, Order_Detail.map.get(element) + 1);
+                    if (InventoryGUI.map.containsKey(element)) {
+                        InventoryGUI.map.put(element, InventoryGUI.map.get(element) + 1);
                     } else {
-                        Order_Detail.map.put(element, 1);
+                        InventoryGUI.map.put(element, 1);
                     }
                 }
 
-                for (Map.Entry<String, Integer> entry : Order_Detail.map.entrySet()) {
+                for (Map.Entry<String, Integer> entry : InventoryGUI.map.entrySet()) {
                     String k = entry.getKey();
                     int v = entry.getValue();
                     //System.out.println(k + " + " + v);
-                    Order_Detail.model2.addRow(new Object[]{k, v});
+                    InventoryGUI.model2.addRow(new Object[]{k, v});
                 }
     
     }

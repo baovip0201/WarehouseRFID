@@ -70,15 +70,17 @@ public class Input1 {
     
     List<String> getTags(){
         List<String> list=new ArrayList<>();
-        for(int i=30;i<50;i++){
+        for(int i=41;i<51;i++){
             list.add("300F 4FB7 3AD0 01C0 8369 A"+i);
         }
                       
         return list;
     }
-    public void scan2(){              
+    public void scan2(){  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
                 for(String s: getTags()) {                   
-                    TagRFID.map.put(s, new RFID("1","1"));
+                    TagRFID.map.put(s, new RFID(dtf.format(now),"1"));
                     TagRFID.model.setRowCount(0);
 
                     for (Map.Entry<String, RFID> entry : TagRFID.map.entrySet()) {

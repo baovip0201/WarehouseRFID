@@ -2,7 +2,7 @@ package com.example.sdksamples;
 
 import BUS.Tag_BUS;
 import DTO.RFID;
-import GUI.Order_Detail;
+import GUI.InventoryGUI;
 import com.impinj.octane.ImpinjReader;
 import com.impinj.octane.Tag;
 import com.impinj.octane.TagReport;
@@ -56,7 +56,7 @@ public class TagReportListenerImplementation implements TagReportListener {
                         String k = entry.getKey();
                         RFID v = entry.getValue();
                         model1.addRow(new Object[]{k, v.getDate(), v.getGate()});
-                        Order_Detail.tbl_scan.setModel(model1);
+                        InventoryGUI.tbl_scan.setModel(model1);
                     }
 
                 }
@@ -92,9 +92,9 @@ public class TagReportListenerImplementation implements TagReportListener {
         Vector data = model1.getDataVector();
         Vector row = (Vector) data.elementAt(0);
         int mColIndex = 0;
-        Set<String> colData = new HashSet<>(Order_Detail.tbl_scan.getRowCount());
+        Set<String> colData = new HashSet<>(InventoryGUI.tbl_scan.getRowCount());
 
-        for (int i = 0; i < Order_Detail.tbl_scan.getRowCount(); i++) {
+        for (int i = 0; i < InventoryGUI.tbl_scan.getRowCount(); i++) {
             row = (Vector) data.elementAt(i);
             colData.add(row.get(mColIndex).toString());
         }

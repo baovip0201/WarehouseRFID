@@ -49,7 +49,7 @@ import org.openide.util.Exceptions;
  *
  * @author MSI
  */
-public class Order_Detail extends javax.swing.JFrame {
+public class InventoryGUI extends javax.swing.JFrame {
 
     public static DefaultTableModel model, model1, model2;
     List<Orderdetail> dList = new ArrayList<>();
@@ -62,7 +62,7 @@ public class Order_Detail extends javax.swing.JFrame {
     public static Map<String, Integer> map;
     public static Map<String, RFID> map1=new HashMap<>();
     public static Map<String, RFID> map2=new HashMap<>();
-    public Order_Detail() {
+    public InventoryGUI() {
         initComponents();
         model = (DefaultTableModel) tbl_orderdetail.getModel();
         model1 = (DefaultTableModel) tbl_scan.getModel();
@@ -271,7 +271,7 @@ public class Order_Detail extends javax.swing.JFrame {
                 btnThemDiemActionPerformed(evt);
             }
         });
-        jPanel2.add(btnThemDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 100, 50));
+        jPanel2.add(btnThemDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 100, 50));
 
         btnXoaDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnXoaDiem.setForeground(new java.awt.Color(51, 51, 51));
@@ -293,7 +293,7 @@ public class Order_Detail extends javax.swing.JFrame {
                 btnSuaDiemActionPerformed(evt);
             }
         });
-        jPanel2.add(btnSuaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 100, 50));
+        jPanel2.add(btnSuaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, 50));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_exit_20px.png"))); // NOI18N
@@ -303,7 +303,7 @@ public class Order_Detail extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 90, 50));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 90, 50));
 
         btnScan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnScan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_calculator_30px.png"))); // NOI18N
@@ -313,7 +313,7 @@ public class Order_Detail extends javax.swing.JFrame {
                 btnScanActionPerformed(evt);
             }
         });
-        jPanel2.add(btnScan, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 120, 50));
+        jPanel2.add(btnScan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 120, 50));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -329,13 +329,15 @@ public class Order_Detail extends javax.swing.JFrame {
         });
         jPanel2.add(cbb_order_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 204, -1));
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_check_30px.png"))); // NOI18N
         jButton2.setText("Check");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 80, 50));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 110, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 84, 540, 190));
 
@@ -343,15 +345,18 @@ public class Order_Detail extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDiemActionPerformed
+        Orderdetail tv = new Orderdetail();
         for(Map.Entry<String, Integer> entry: map.entrySet()){
             String k=entry.getKey();
-            int v=entry.getValue();
-            Orderdetail tv = new Orderdetail();
+            int v=entry.getValue();          
                 tv.setOrder_id(cbb_order_id.getSelectedItem().toString());                
                 tv.setProduct_id(k);
                 tv.setQuanity(v);
-                bus.them(tv);         
-        }
+                bus.them(tv); 
+                tagBUS.updateTag(tv.getProduct_id(), cbb_order_id.getSelectedItem().toString());
+                
+        }              
+                bus1.updateStatus(cbb_order_id.getSelectedItem().toString());
                 JOptionPane.showMessageDialog(rootPane, "Đã thêm");
                 tbl_orderdetail.setModel(model);
                 showD();
@@ -410,6 +415,8 @@ public class Order_Detail extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         List<Test> products=new ArrayList<>();
         products=bus.getListProductID(cbb_order_id.getSelectedItem().toString());
+        int count=0;
+        int size=products.size();
         for(Test t: products){
             for (Map.Entry<String, Integer> entry : map.entrySet()) {
                     String k = entry.getKey();
@@ -417,18 +424,31 @@ public class Order_Detail extends javax.swing.JFrame {
                     //System.out.println("Map: "+k + ": " + v);
                     if(k.equals(t.getProduct_id())){
                         if(v==Integer.parseInt(t.getQty())){
-                            System.out.println("Product ID "+t.getProduct_id()+" Đã đủ số lượng trong hóa đơn!!!");
-                            bus1.updateStatus(cbb_order_id.getSelectedItem().toString());
+                            JOptionPane.showMessageDialog(null, "Product ID "+t.getProduct_id()+" Đã đủ số lượng trong hóa đơn!!!");
+                            //System.out.println("Product ID "+t.getProduct_id()+" Đã đủ số lượng trong hóa đơn!!!");
+                            count++; 
+                            if(count==size){
+                                System.out.println("Set status thanh cong");
+                                bus1.updateStatus(cbb_order_id.getSelectedItem().toString());
+                            }
                         }else if(v<Integer.parseInt(t.getQty())){
-                            System.out.println("Product ID"+t.getProduct_id()+" chưa đủ số lượng trong hóa đơn!!!");
+                            JOptionPane.showMessageDialog(null, "Product ID "+t.getProduct_id()+" chưa đủ số lượng trong hóa đơn!!!");
+                            //System.out.println("Product ID"+t.getProduct_id()+" chưa đủ số lượng trong hóa đơn!!!");
                         }else if(v>Integer.parseInt(t.getQty())){
+                            JOptionPane.showMessageDialog(null, "Product ID "+t.getProduct_id()+" thừa số lượng trong hóa đơn!!!");
                             System.out.println("Product ID"+t.getProduct_id()+" thừa số lượng trong hóa đơn!!!");
                         }
                     }else if(!k.contains(t.getProduct_id())){
-                        System.out.println(k+" khong co trong hóa đơn");
+                        System.out.println(k+" so sanh trung hoac khong co trong hóa đơn");
                     }
+                    
                 }
             //System.out.println(t.getProduct_id()+": "+t.getQty());
+        }
+        if(count==size){
+            for( Test t: products){
+                tagBUS.updateTag(t.getProduct_id(), cbb_order_id.getSelectedItem().toString());
+            }
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -462,7 +482,7 @@ public class Order_Detail extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Order_Detail().setVisible(true);
+                new InventoryGUI().setVisible(true);
             }
         });
     }

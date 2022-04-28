@@ -122,4 +122,23 @@ public class TagDAO {
         }
         return a.get(0).toString();
     }
+    public void updateTag(String dk, String orderId){
+        try {
+            String sql="update tag_rfid set order_id='"+orderId+"' where product_id='"+dk+"'";
+            ps=conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateDateScan(String dk, String date){
+        try {
+            String sql="update tag_rfid set date='"+date+"' where tag_id='"+dk+"'";
+            ps=conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

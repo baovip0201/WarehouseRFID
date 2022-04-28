@@ -51,5 +51,11 @@ public class Tag_BUS {
     public String query_product_id(String id){
         return data.query_product_id(id);
     }
+    public void updateTag(String dk, String order_id){
+        data.updateTag(dk, order_id);
+    }
+    public void updateTimeScanTag(String dk, String date){
+        data.updateTag(dk, date);
+    }
 
 }
