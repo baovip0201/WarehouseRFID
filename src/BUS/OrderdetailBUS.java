@@ -73,4 +73,7 @@ public class OrderdetailBUS {
         list=data.getProductID(orderId);
         return list;
     }
+     public void updateWarehouse(String productId, int qty){
+         data.updateWarehouse(productId, qty);
+     }
 }

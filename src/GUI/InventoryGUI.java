@@ -354,6 +354,7 @@ public class InventoryGUI extends javax.swing.JFrame {
                 tv.setQuanity(v);
                 bus.them(tv); 
                 tagBUS.updateTag(tv.getProduct_id(), cbb_order_id.getSelectedItem().toString());
+                bus.updateWarehouse(k, v);
                 
         }              
                 bus1.updateStatus(cbb_order_id.getSelectedItem().toString());
@@ -448,6 +449,8 @@ public class InventoryGUI extends javax.swing.JFrame {
         if(count==size){
             for( Test t: products){
                 tagBUS.updateTag(t.getProduct_id(), cbb_order_id.getSelectedItem().toString());
+                bus.updateWarehouse(t.getProduct_id(), Integer.parseInt(t.getQty()));
+                System.out.println("Cập nhật số lượng tồn thành công");
             }
         }
         

@@ -190,4 +190,27 @@ public class OrderdetailDAO {
         }
        return kq;
     }
+    public int query_quanity_from_product(String id){   
+        List<Integer> a=new ArrayList<>();
+        try {
+            String sql="select * from product where product_id='"+id+"'";
+            ps=conn.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                int quanity=rs.getInt("quanity");
+                a.add(quanity);
+            }
+        } catch (Exception e) {
+        }
+        return a.get(0);
+    }
+    public void updateWarehouse(String dk, int qty){
+        try {
+            String sql="update product set quanity='"+query_quanity_from_product(dk)+qty+"' where product_id='"+dk+"'";
+            ps=conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
 }
