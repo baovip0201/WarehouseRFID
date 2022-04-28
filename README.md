@@ -21,5 +21,11 @@ Quá trình nhập kho:
 ![image](https://user-images.githubusercontent.com/66128080/165510528-bfd23013-51bd-4943-9f35-7491cea0fd42.png)
 ![image](https://user-images.githubusercontent.com/66128080/165510636-9cdae5aa-09cd-45ee-9876-4973915ce17f.png)
 
+Thống kê hóa đơn đã nhập
+![image](https://user-images.githubusercontent.com/66128080/165689126-2a0d5a76-b079-4ffa-99f9-bda8c9dccfcb.png)
+![image](https://user-images.githubusercontent.com/66128080/165689181-6c5a1a3e-93ff-419f-85c6-2b5fc33d8f52.png)
+
+
+
 
 Đang hoàn thiện........
