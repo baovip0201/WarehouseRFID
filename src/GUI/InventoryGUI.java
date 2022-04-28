@@ -353,7 +353,7 @@ public class InventoryGUI extends javax.swing.JFrame {
                 tv.setProduct_id(k);
                 tv.setQuanity(v);
                 bus.them(tv); 
-                //tagBUS.updateTag(tv.getProduct_id(), cbb_order_id.getSelectedItem().toString());
+                tagBUS.updateTag(tv.getProduct_id(), cbb_order_id.getSelectedItem().toString());
                 
         }              
                 bus1.updateStatus(cbb_order_id.getSelectedItem().toString());
