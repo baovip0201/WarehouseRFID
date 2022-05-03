@@ -50,6 +50,7 @@ public class TagRFID extends javax.swing.JFrame {
     Tag_BUS bus = new Tag_BUS();
     OrderdetailBUS bus1 = new OrderdetailBUS();
     public static Map<String, RFID> map = new HashMap<>();
+    boolean isStop=true;
 
     /**
      * Creates new form TagRFID
@@ -472,7 +473,6 @@ public class TagRFID extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_tagMouseClicked
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
-
 
     }//GEN-LAST:event_btnConnectActionPerformed
 

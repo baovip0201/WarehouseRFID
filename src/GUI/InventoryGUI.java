@@ -439,9 +439,9 @@ public class InventoryGUI extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Product ID "+t.getProduct_id()+" thừa số lượng trong hóa đơn!!!");
                             System.out.println("Product ID"+t.getProduct_id()+" thừa số lượng trong hóa đơn!!!");
                         }
-                    }else if(!k.contains(t.getProduct_id())){
-                        System.out.println(k+" so sanh trung hoac khong co trong hóa đơn");
-                    }
+                    }//else if(!k.contains(t.getProduct_id())){
+                        //System.out.println(k+" so sanh trung hoac khong co trong hóa đơn");
+                    //}
                     
                 }
             //System.out.println(t.getProduct_id()+": "+t.getQty());

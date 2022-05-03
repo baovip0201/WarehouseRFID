@@ -102,34 +102,34 @@ public class MyTagReportListener1 implements TagReportListener {
 
     }
 
-    void show() {
-        InventoryGUI.model2.setRowCount(0);
-        Vector data = InventoryGUI.model1.getDataVector();
-        Vector row = (Vector) data.elementAt(0);
-        int mColIndex = 0;
-        Set<String> colData = new HashSet<>(InventoryGUI.tbl_scan.getRowCount());
-
-        for (int i = 0; i < InventoryGUI.tbl_scan.getRowCount(); i++) {
-            row = (Vector) data.elementAt(i);
-            colData.add(row.get(mColIndex).toString());
-        }
-        for (String s : colData) {
-            System.out.println(s);
-            String element = tagBUS.query_product_id(s);
-
-            if (InventoryGUI.map.containsKey(element)) {
-                InventoryGUI.map.put(element, InventoryGUI.map.get(element) + 1);
-            } else {
-                InventoryGUI.map.put(element, 1);
-            }
-        }
-
-        for (Map.Entry<String, Integer> entry : InventoryGUI.map.entrySet()) {
-            String k = entry.getKey();
-            int v = entry.getValue();
-            System.out.println(k + " + " + v);
-            InventoryGUI.model2.addRow(new Object[]{k, v});
-        }
-    }
+//    void show() {
+//        InventoryGUI.model2.setRowCount(0);
+//        Vector data = InventoryGUI.model1.getDataVector();
+//        Vector row = (Vector) data.elementAt(0);
+//        int mColIndex = 0;
+//        Set<String> colData = new HashSet<>(InventoryGUI.tbl_scan.getRowCount());
+//
+//        for (int i = 0; i < InventoryGUI.tbl_scan.getRowCount(); i++) {
+//            row = (Vector) data.elementAt(i);
+//            colData.add(row.get(mColIndex).toString());
+//        }
+//        for (String s : colData) {
+//            System.out.println(s);
+//            String element = tagBUS.query_product_id(s);
+//
+//            if (InventoryGUI.map.containsKey(element)) {
+//                InventoryGUI.map.put(element, InventoryGUI.map.get(element) + 1);
+//            } else {
+//                InventoryGUI.map.put(element, 1);
+//            }
+//        }
+//
+//        for (Map.Entry<String, Integer> entry : InventoryGUI.map.entrySet()) {
+//            String k = entry.getKey();
+//            int v = entry.getValue();
+//            System.out.println(k + " + " + v);
+//            InventoryGUI.model2.addRow(new Object[]{k, v});
+//        }
+//    }
 
 }
