@@ -55,13 +55,14 @@ public class InventoryGUI extends javax.swing.JFrame {
     List<Orderdetail> dList = new ArrayList<>();
     OrderdetailBUS bus = new OrderdetailBUS();
     Set<RFID> list_rfid;
-    Tag_BUS tagBUS=new Tag_BUS();
-    TagRFID tagrfid=new TagRFID();
-    Set<String> tempList=new HashSet<>();
-    OrderBUS bus1=new OrderBUS();
+    Tag_BUS tagBUS = new Tag_BUS();
+    TagRFID tagrfid = new TagRFID();
+    Set<String> tempList = new HashSet<>();
+    OrderBUS bus1 = new OrderBUS();
     public static Map<String, Integer> map;
-    public static Map<String, RFID> map1=new HashMap<>();
-    public static Map<String, RFID> map2=new HashMap<>();
+    public static Map<String, RFID> map1 = new HashMap<>();
+    public static Map<String, RFID> map2 = new HashMap<>();
+
     public InventoryGUI() {
         initComponents();
         model = (DefaultTableModel) tbl_orderdetail.getModel();
@@ -72,58 +73,57 @@ public class InventoryGUI extends javax.swing.JFrame {
         //showProduct();
         getCb_Box_Order();
         //getCb_Box_Product();
-        
+
     }
-    private void showD(){
-        dList=bus.getListV();
+
+    private void showD() {
+        dList = bus.getListV();
         model.setRowCount(0);
-        dList.forEach((tv)->{
-        model.addRow(new Object[] {tv.getOrder_id(),tv.getProduct_id(),tv.getQuanity()});
+        dList.forEach((tv) -> {
+            model.addRow(new Object[]{tv.getOrder_id(), tv.getProduct_id(), tv.getQuanity()});
         });
-        
+
     }
-    private void getCb_Box_Order(){        
-        List<Order> list=new ArrayList<>();       
-        list = bus.fill_cbb_order();
-        for(Order item: list){
+
+    public void getCb_Box_Order() {
+
+        List<Order> listcbb = new ArrayList<>();
+        listcbb = bus.fill_cbb_order();
+        for (Order item : listcbb) {
             cbb_order_id.addItem(item.getOrder_id());
         }
-        
-     }
-    
-    
-   
-    
 
-    private void showProduct(){
+    }
+
+    private void showProduct() {
         model2.setRowCount(0);
-        map=new HashMap<>();
-        for(RFID ls: MyTagReportListener1.scan){
+        map = new HashMap<>();
+        for (RFID ls : MyTagReportListener1.scan) {
             map2.put(ls.getTagID(), new RFID(ls.getDate(), ls.getGate()));
         }
-         for (Map.Entry<String, RFID> entry : map2.entrySet()) {
+        for (Map.Entry<String, RFID> entry : map2.entrySet()) {
             String k = entry.getKey();
 
             //System.out.println("KQ: "+k);
-            String element=tagBUS.query_product_id(k);
+            String element = tagBUS.query_product_id(k);
             System.out.println(element);
-                     
-            if(map.containsKey(element)){
-                map.put(element, map.get(element)+1);
-            }else{
-                map.put(element,1);
+
+            if (map.containsKey(element)) {
+                map.put(element, map.get(element) + 1);
+            } else {
+                map.put(element, 1);
             }
-            
-        }             
-        for(Map.Entry<String, Integer> entry: map.entrySet()){
-            String k=entry.getKey();
-            int v=entry.getValue();
-            System.out.println(k +" + "+ v);
-            model2.addRow(new Object[]{k,v});
+
         }
-        
-        
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            String k = entry.getKey();
+            int v = entry.getValue();
+            System.out.println(k + " + " + v);
+            model2.addRow(new Object[]{k, v});
+        }
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -147,7 +147,9 @@ public class InventoryGUI extends javax.swing.JFrame {
         btnScan = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cbb_order_id = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        btnCheck = new javax.swing.JButton();
+        btn_new_order = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -322,6 +324,16 @@ public class InventoryGUI extends javax.swing.JFrame {
 
         cbb_order_id.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cbb_order_id.setForeground(new java.awt.Color(51, 51, 51));
+        cbb_order_id.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbb_order_idItemStateChanged(evt);
+            }
+        });
+        cbb_order_id.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbb_order_idMouseClicked(evt);
+            }
+        });
         cbb_order_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbb_order_idActionPerformed(evt);
@@ -329,15 +341,33 @@ public class InventoryGUI extends javax.swing.JFrame {
         });
         jPanel2.add(cbb_order_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 204, -1));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_check_30px.png"))); // NOI18N
-        jButton2.setText("Check");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCheck.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_check_30px.png"))); // NOI18N
+        btnCheck.setText("Check");
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCheckActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 110, 50));
+        jPanel2.add(btnCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 110, 50));
+
+        btn_new_order.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_new_order.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_add_30px.png"))); // NOI18N
+        btn_new_order.setText("Order");
+        btn_new_order.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_new_orderActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_new_order, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 110, 50));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_sync_20px.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 84, 540, 190));
 
@@ -346,47 +376,51 @@ public class InventoryGUI extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         Orderdetail tv = new Orderdetail();
-        for(Map.Entry<String, Integer> entry: map.entrySet()){
-            String k=entry.getKey();
-            int v=entry.getValue();          
-                tv.setOrder_id(cbb_order_id.getSelectedItem().toString());                
-                tv.setProduct_id(k);
-                tv.setQuanity(v);
-                bus.them(tv); 
-                tagBUS.updateTag(tv.getProduct_id(), cbb_order_id.getSelectedItem().toString());
-                bus.updateWarehouse(k, v);
-                
-        }              
-                bus1.updateStatus(cbb_order_id.getSelectedItem().toString());
-                JOptionPane.showMessageDialog(rootPane, "Đã thêm");
-                tbl_orderdetail.setModel(model);
-                showD();
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            String k = entry.getKey();
+            int v = entry.getValue();
+            tv.setOrder_id(cbb_order_id.getSelectedItem().toString());
+            tv.setProduct_id(k);
+            tv.setQuanity(v);
+            bus.them(tv);
+            //tagBUS.updateTag(tv.getProduct_id(), cbb_order_id.getSelectedItem().toString());
+            bus.updateWarehouse(tv.getProduct_id(), tv.getQuanity());
+
+        }
+        bus1.updateStatus(cbb_order_id.getSelectedItem().toString());
+        JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+        tbl_orderdetail.setModel(model);
+        showD();
+        for (Map.Entry<String, RFID> entry : map1.entrySet()) {
+            String k = entry.getKey();
+            tagBUS.updateTag(k, cbb_order_id.getSelectedItem().toString());
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int i = tbl_orderdetail.getSelectedRow();
-        String dk=(tbl_orderdetail.getValueAt(i, 0).toString());
-        String dk1=(tbl_orderdetail.getValueAt(i, 1).toString());
+        String dk = (tbl_orderdetail.getValueAt(i, 0).toString());
+        String dk1 = (tbl_orderdetail.getValueAt(i, 1).toString());
         Orderdetail tv = new Orderdetail();
-        model.setValueAt(tv.getQuanity(), i, 2); 
-        bus.sua(tv,dk,dk1);
+        model.setValueAt(tv.getQuanity(), i, 2);
+        bus.sua(tv, dk, dk1);
         JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
         showD();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int i = tbl_orderdetail.getSelectedRow();
-       
+
         Orderdetail tv = bus.dsd.get(i);
         int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?");
-            if(option == 0){
+        if (option == 0) {
             bus.xoa(tv);
             if (bus.dsd.remove(i) == null) {
-            model.removeRow(i);
+                model.removeRow(i);
             }
             tbl_orderdetail.setModel(model);
-        showD();
-        
+            showD();
+
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -409,61 +443,96 @@ public class InventoryGUI extends javax.swing.JFrame {
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
         model1.setRowCount(0);
         model2.setRowCount(0);
-        map1=new HashMap<>();
-        map=new HashMap<>();
+        map1 = new HashMap<>();
+        map = new HashMap<>();
+
     }//GEN-LAST:event_btn_refreshActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        List<Test> products=new ArrayList<>();
-        products=bus.getListProductID(cbb_order_id.getSelectedItem().toString());
-        int count=0;
-        int size=products.size();
-        for(Test t: products){
-            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        List<Test> products = new ArrayList<>();
+        products = bus.getListProductID(cbb_order_id.getSelectedItem().toString());
+        int count = 0;
+        int size = products.size();
+        if (bus1.getStatusOrder(cbb_order_id.getSelectedItem().toString()) == 3) {
+            System.out.println("Hóa đơn này đã hoàn thành!!!");
+        } else {
+            for (Test t : products) {
+                for (Map.Entry<String, Integer> entry : map.entrySet()) {
                     String k = entry.getKey();
                     int v = entry.getValue();
                     //System.out.println("Map: "+k + ": " + v);
-                    if(k.equals(t.getProduct_id())){
-                        if(v==Integer.parseInt(t.getQty())){
-                            JOptionPane.showMessageDialog(null, "Product ID "+t.getProduct_id()+" Đã đủ số lượng trong hóa đơn!!!");
+                    if (k.equals(t.getProduct_id())) {
+                        if (v == Integer.parseInt(t.getQty())) {
+                            JOptionPane.showMessageDialog(null, "Product ID " + t.getProduct_id() + " Đã đủ số lượng trong hóa đơn!!!");
                             //System.out.println("Product ID "+t.getProduct_id()+" Đã đủ số lượng trong hóa đơn!!!");
-                            count++; 
-                            if(count==size){
+                            count++;
+                            if (count == size) {
                                 System.out.println("Set status thanh cong");
                                 bus1.updateStatus(cbb_order_id.getSelectedItem().toString());
                             }
-                        }else if(v<Integer.parseInt(t.getQty())){
-                            JOptionPane.showMessageDialog(null, "Product ID "+t.getProduct_id()+" chưa đủ số lượng trong hóa đơn!!!");
+                        } else if (v < Integer.parseInt(t.getQty())) {
+                            JOptionPane.showMessageDialog(null, "Product ID " + t.getProduct_id() + " chưa đủ số lượng trong hóa đơn!!!");
                             //System.out.println("Product ID"+t.getProduct_id()+" chưa đủ số lượng trong hóa đơn!!!");
-                        }else if(v>Integer.parseInt(t.getQty())){
-                            JOptionPane.showMessageDialog(null, "Product ID "+t.getProduct_id()+" thừa số lượng trong hóa đơn!!!");
-                            System.out.println("Product ID"+t.getProduct_id()+" thừa số lượng trong hóa đơn!!!");
+                        } else if (v > Integer.parseInt(t.getQty())) {
+                            JOptionPane.showMessageDialog(null, "Product ID " + t.getProduct_id() + " thừa số lượng trong hóa đơn!!!");
+                            System.out.println("Product ID" + t.getProduct_id() + " thừa số lượng trong hóa đơn!!!");
                         }
                     }//else if(!k.contains(t.getProduct_id())){
-                        //System.out.println(k+" so sanh trung hoac khong co trong hóa đơn");
+                    //System.out.println(k+" so sanh trung hoac khong co trong hóa đơn");
                     //}
-                    
+
                 }
-            //System.out.println(t.getProduct_id()+": "+t.getQty());
-        }
-        if(count==size){
-            for( Test t: products){
-                tagBUS.updateTag(t.getProduct_id(), cbb_order_id.getSelectedItem().toString());
-                bus.updateWarehouse(t.getProduct_id(), Integer.parseInt(t.getQty()));
-                System.out.println("Cập nhật số lượng tồn thành công");
+                //System.out.println(t.getProduct_id()+": "+t.getQty());
+            }
+
+            if (count == size) {
+
+                for (Map.Entry<String, RFID> entry : map1.entrySet()) {
+                    String k = entry.getKey();
+                    tagBUS.updateTag(k, cbb_order_id.getSelectedItem().toString());
+                }
+                for (Test t : products) {
+                    bus.updateWarehouse(t.getProduct_id(), Integer.parseInt(t.getQty()));
+                    System.out.println("Cập nhật số lượng tồn thành công");
+                }
             }
         }
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+    }//GEN-LAST:event_btnCheckActionPerformed
 
     private void cbb_order_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_order_idActionPerformed
-        List<Test> products=new ArrayList<>();
-        products=bus.getListProductID(cbb_order_id.getSelectedItem().toString());
-        model.setRowCount(0);
-        for(Test t: products){
-            model.addRow(new Object[] {cbb_order_id.getSelectedItem().toString(),t.getProduct_id(),t.getQty()});
-        }
+
     }//GEN-LAST:event_cbb_order_idActionPerformed
+
+    private void btn_new_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_new_orderActionPerformed
+        Order_GUI a = new Order_GUI();
+        a.setVisible(true);
+        a.setLocationRelativeTo(null);
+
+    }//GEN-LAST:event_btn_new_orderActionPerformed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        cbb_order_id.removeAllItems();
+        getCb_Box_Order();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void cbb_order_idMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbb_order_idMouseClicked
+        List<Test> products = new ArrayList<>();
+        products = bus.getListProductID(cbb_order_id.getSelectedItem().toString());
+        model.setRowCount(0);
+        for (Test t : products) {
+            model.addRow(new Object[]{cbb_order_id.getSelectedItem().toString(), t.getProduct_id(), t.getQty()});
+        }
+    }//GEN-LAST:event_cbb_order_idMouseClicked
+
+    private void cbb_order_idItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_order_idItemStateChanged
+//        List<Test> products=new ArrayList<>();
+//        products=bus.getListProductID(cbb_order_id.getSelectedItem().toString());
+//        model.setRowCount(0);
+//        for(Test t: products){
+//            model.addRow(new Object[] {cbb_order_id.getSelectedItem().toString(),t.getProduct_id(),t.getQty()});
+//        }
+    }//GEN-LAST:event_cbb_order_idItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -474,7 +543,7 @@ public class InventoryGUI extends javax.swing.JFrame {
             //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
             /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-            */
+             */
             UIManager.setLookAndFeel(new FlatLightLaf());
             //</editor-fold>
             //</editor-fold>
@@ -491,18 +560,20 @@ public class InventoryGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnScan;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btn_new_order;
     private javax.swing.JButton btn_refresh;
     private javax.swing.JComboBox<String> cbb_order_id;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

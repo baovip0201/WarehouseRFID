@@ -221,6 +221,7 @@ public class Order_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_orderMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

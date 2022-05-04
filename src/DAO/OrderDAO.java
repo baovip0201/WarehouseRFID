@@ -124,5 +124,19 @@ public class OrderDAO {
         }
         return list;
     }
+    public int getStatusOrder(String id){
+        List<Integer> a=new ArrayList<>();
+        try {
+            String sql="select * from db_order where order_id='"+id+"'";
+            ps=conn.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                int status=rs.getInt("status");
+                a.add(status);
+            }
+        } catch (Exception e) {
+        }
+        return a.get(0);
+    }
 
 }

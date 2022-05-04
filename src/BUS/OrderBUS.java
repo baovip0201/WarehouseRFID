@@ -18,6 +18,7 @@ import java.util.List;
 public class OrderBUS {
     public List<Report> report;
     public List<Order> dsmh;
+    //public List<Integer> list;
     OrderDAO data = new OrderDAO();
     public OrderBUS(){
         
@@ -49,5 +50,8 @@ public class OrderBUS {
         if(report==null) report=new ArrayList<>();
         report=data.report(from, to);
         return report;
+    }
+    public int getStatusOrder(String id){
+        return data.getStatusOrder(id);
     }
 }

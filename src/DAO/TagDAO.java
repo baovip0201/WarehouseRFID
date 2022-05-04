@@ -124,7 +124,7 @@ public class TagDAO {
     }
     public void updateTag(String dk, String orderId){
         try {
-            String sql="update tag_rfid set order_id='"+orderId+"' where product_id='"+dk+"'";
+            String sql="update tag_rfid set tag_rfid.order_id='"+orderId+"' where tag_id='"+dk+"'";
             ps=conn.prepareStatement(sql);
             ps.executeUpdate();
         } catch (Exception e) {

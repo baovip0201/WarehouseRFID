@@ -206,7 +206,9 @@ public class OrderdetailDAO {
     }
     public void updateWarehouse(String dk, int qty){
         try {
-            String sql="update product set quanity='"+query_quanity_from_product(dk)+qty+"' where product_id='"+dk+"'";
+            int update=query_quanity_from_product(dk)+qty;
+            System.out.println(update);
+            String sql="update product set quanity='"+update+"' where product_id='"+dk+"'";
             ps=conn.prepareStatement(sql);
             ps.executeUpdate();
         } catch (Exception e) {
