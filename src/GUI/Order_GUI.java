@@ -70,7 +70,7 @@ public class Order_GUI extends javax.swing.JFrame {
         getContentPane().add(txt_order_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 140, 260, 30));
 
         cbb_status.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cbb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
+        cbb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
         getContentPane().add(cbb_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 201, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

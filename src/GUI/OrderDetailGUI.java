@@ -31,9 +31,11 @@ import javax.swing.table.DefaultTableModel;
  * @author MSI
  */
 public class OrderDetailGUI extends javax.swing.JFrame {
+
     public static DefaultTableModel model;
     List<Orderdetail> dList = new ArrayList<>();
-    OrderdetailBUS bus = new OrderdetailBUS();        
+    OrderdetailBUS bus = new OrderdetailBUS();
+
     /**
      * Creates new form OrderDetailGUI
      */
@@ -46,27 +48,27 @@ public class OrderDetailGUI extends javax.swing.JFrame {
         getCb_Box_Order();
         getCb_Box_Product();
     }
-    
+
     private void showD() {
-        dList=bus.getListV();
+        dList = bus.getListV();
         model.setRowCount(0);
-        dList.forEach((tv)->{
-        model.addRow(new Object[] {tv.getOrder_id(),tv.getProduct_id(),tv.getQuanity()});
+        dList.forEach((tv) -> {
+            model.addRow(new Object[]{tv.getOrder_id(), tv.getProduct_id(), tv.getQuanity()});
         });
     }
 
     private void getCb_Box_Order() {
-        List<Order> list=new ArrayList<>();       
+        List<Order> list = new ArrayList<>();
         list = bus.fill_cbb_order();
-        for(Order item: list){
+        for (Order item : list) {
             cbb_order_id.addItem(item.getOrder_id());
-        }      
+        }
     }
 
     private void getCb_Box_Product() {
-        List<Product> list=new ArrayList<>();       
+        List<Product> list = new ArrayList<>();
         list = bus.fill_cbb_product();
-        for(Product item: list){
+        for (Product item : list) {
             cbb_product_id.addItem(item.getProduct_id());
         }
     }
@@ -90,8 +92,8 @@ public class OrderDetailGUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txt_qty = new javax.swing.JTextField();
         btn_save = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_update = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         cbb_product_id = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -151,10 +153,27 @@ public class OrderDetailGUI extends javax.swing.JFrame {
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButton2, org.openide.util.NbBundle.getMessage(OrderDetailGUI.class, "OrderDetailGUI.jButton2.text")); // NOI18N
+        btn_update.setBackground(new java.awt.Color(255, 255, 255));
+        btn_update.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_update_20px_1.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(btn_update, org.openide.util.NbBundle.getMessage(OrderDetailGUI.class, "OrderDetailGUI.btn_update.text")); // NOI18N
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButton3, org.openide.util.NbBundle.getMessage(OrderDetailGUI.class, "OrderDetailGUI.jButton3.text")); // NOI18N
+        btn_delete.setBackground(new java.awt.Color(255, 255, 255));
+        btn_delete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_delete_20px.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(btn_delete, org.openide.util.NbBundle.getMessage(OrderDetailGUI.class, "OrderDetailGUI.btn_delete.text")); // NOI18N
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
+        jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_exit_20px.png"))); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(jButton4, org.openide.util.NbBundle.getMessage(OrderDetailGUI.class, "OrderDetailGUI.jButton4.text")); // NOI18N
@@ -185,12 +204,12 @@ public class OrderDetailGUI extends javax.swing.JFrame {
                             .addComponent(cbb_product_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(44, 44, 44)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addComponent(jButton2))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -210,12 +229,12 @@ public class OrderDetailGUI extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(66, 66, 66)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_save)
-                    .addComponent(jButton2))
-                .addGap(44, 44, 44)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_delete, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -233,6 +252,11 @@ public class OrderDetailGUI extends javax.swing.JFrame {
                 "Order_ID", "Product_ID", "QTY"
             }
         ));
+        tbl_detail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_detailMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_detail);
         if (tbl_detail.getColumnModel().getColumnCount() > 0) {
             tbl_detail.getColumnModel().getColumn(0).setHeaderValue(org.openide.util.NbBundle.getMessage(OrderDetailGUI.class, "OrderDetailGUI.tbl_detail.columnModel.title0")); // NOI18N
@@ -247,7 +271,7 @@ public class OrderDetailGUI extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -268,20 +292,54 @@ public class OrderDetailGUI extends javax.swing.JFrame {
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         Orderdetail tv = new Orderdetail();
-                
-                tv.setProduct_id(cbb_product_id.getSelectedItem().toString());
-                tv.setOrder_id(cbb_order_id.getSelectedItem().toString());
-               
-                tv.setQuanity(Integer.parseInt(txt_qty.getText()));
-                bus.them(tv);
-                JOptionPane.showMessageDialog(rootPane, "Đã thêm");
-                tbl_detail.setModel(model);
-                showD();
+
+        tv.setProduct_id(cbb_product_id.getSelectedItem().toString());
+        tv.setOrder_id(cbb_order_id.getSelectedItem().toString());
+
+        tv.setQuanity(Integer.parseInt(txt_qty.getText()));
+        bus.them(tv);
+        JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+        tbl_detail.setModel(model);
+        showD();
     }//GEN-LAST:event_btn_saveActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        int i = tbl_detail.getSelectedRow();
+        String id = (tbl_detail.getValueAt(i, 0).toString());
+        String product_id = (tbl_detail.getValueAt(i, 1).toString());
+        Orderdetail tv = new Orderdetail();
+        tv.setQuanity(Integer.parseInt(txt_qty.getText()));
+        model.setValueAt(tv.getQuanity(), i, 2);
+        bus.sua(tv, id, product_id);
+        JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
+        showD();
+    }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void tbl_detailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_detailMouseClicked
+        int Row = tbl_detail.getSelectedRow();
+        txt_qty.setText(tbl_detail.getModel().getValueAt(Row, 2).toString());
+        cbb_order_id.setSelectedItem(tbl_detail.getModel().getValueAt(Row, 0).toString());
+        cbb_product_id.setSelectedItem(tbl_detail.getModel().getValueAt(Row, 1).toString());        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_detailMouseClicked
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        int i = tbl_detail.getSelectedRow();
+
+        Orderdetail tv = bus.dsd.get(i);
+        int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?");
+        if (option == 0) {
+            bus.xoa(tv);
+            if (bus.dsd.remove(i) == null) {
+                model.removeRow(i);
+            }
+            tbl_detail.setModel(model);
+            showD();
+        }
+    }//GEN-LAST:event_btn_deleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,11 +377,11 @@ public class OrderDetailGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_save;
+    private javax.swing.JButton btn_update;
     private javax.swing.JComboBox<String> cbb_order_id;
     private javax.swing.JComboBox<String> cbb_product_id;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -337,5 +395,4 @@ public class OrderDetailGUI extends javax.swing.JFrame {
     private javax.swing.JTextField txt_qty;
     // End of variables declaration//GEN-END:variables
 
-    
 }

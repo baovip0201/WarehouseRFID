@@ -141,10 +141,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btn_refresh = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        btnScan = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cbb_order_id = new javax.swing.JComboBox<>();
         btnCheck = new javax.swing.JButton();
@@ -263,7 +260,7 @@ public class InventoryGUI extends javax.swing.JFrame {
                 btn_refreshActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 50));
+        jPanel2.add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 140, 50));
 
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_save_20px.png"))); // NOI18N
@@ -273,29 +270,7 @@ public class InventoryGUI extends javax.swing.JFrame {
                 btnSaveActionPerformed(evt);
             }
         });
-        jPanel2.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 100, 50));
-
-        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setForeground(new java.awt.Color(51, 51, 51));
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_delete_20px.png"))); // NOI18N
-        btnDelete.setText("Delete");
-        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, 50));
-
-        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_update_20px_1.png"))); // NOI18N
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, 50));
+        jPanel2.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 120, 50));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_exit_20px.png"))); // NOI18N
@@ -305,17 +280,7 @@ public class InventoryGUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 90, 50));
-
-        btnScan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnScan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_calculator_30px.png"))); // NOI18N
-        btnScan.setText("Quanity");
-        btnScan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnScanActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnScan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 120, 50));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 120, 50));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -349,7 +314,7 @@ public class InventoryGUI extends javax.swing.JFrame {
                 btnCheckActionPerformed(evt);
             }
         });
-        jPanel2.add(btnCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 110, 50));
+        jPanel2.add(btnCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 120, 50));
 
         btn_new_order.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_new_order.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_add_30px.png"))); // NOI18N
@@ -359,7 +324,7 @@ public class InventoryGUI extends javax.swing.JFrame {
                 btn_new_orderActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_new_order, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 110, 50));
+        jPanel2.add(btn_new_order, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 140, 50));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_sync_20px.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -397,33 +362,6 @@ public class InventoryGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        int i = tbl_orderdetail.getSelectedRow();
-        String dk = (tbl_orderdetail.getValueAt(i, 0).toString());
-        String dk1 = (tbl_orderdetail.getValueAt(i, 1).toString());
-        Orderdetail tv = new Orderdetail();
-        model.setValueAt(tv.getQuanity(), i, 2);
-        bus.sua(tv, dk, dk1);
-        JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
-        showD();
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int i = tbl_orderdetail.getSelectedRow();
-
-        Orderdetail tv = bus.dsd.get(i);
-        int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?");
-        if (option == 0) {
-            bus.xoa(tv);
-            if (bus.dsd.remove(i) == null) {
-                model.removeRow(i);
-            }
-            tbl_orderdetail.setModel(model);
-            showD();
-
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
     private void tbl_orderdetailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_orderdetailKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_tbl_orderdetailKeyPressed
@@ -435,10 +373,6 @@ public class InventoryGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScanActionPerformed
-        showProduct();
-    }//GEN-LAST:event_btnScanActionPerformed
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
         model1.setRowCount(0);
@@ -561,10 +495,7 @@ public class InventoryGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCheck;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnScan;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btn_new_order;
     private javax.swing.JButton btn_refresh;
     private javax.swing.JComboBox<String> cbb_order_id;

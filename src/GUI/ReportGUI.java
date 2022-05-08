@@ -479,7 +479,7 @@ public static DefaultTableModel model, model1;
         }
         if (k != 1) {
             Help pol = new Help();
-            pol.writeFileExcel("Report", a);
+            pol.writeFileExcel("Report_Detail", a);
             JOptionPane.showMessageDialog(rootPane, "Đã xuất ra excel");
         } else {
             JOptionPane.showMessageDialog(rootPane, "Dữ liệu rỗng");
