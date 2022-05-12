@@ -1,6 +1,8 @@
 # WarehouseRFID
 Ứng dụng nhập kho đơn giản ứng dụng công nghệ RFID Impinj R420
 
+Để chạy chương trình, chạy class Build.java trong package Build
+
 Đăng nhập
 ![image](https://user-images.githubusercontent.com/66128080/165084879-1900b533-0531-4f44-9d4d-4751fe4fca43.png)
 

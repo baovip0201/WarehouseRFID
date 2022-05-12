@@ -41,7 +41,7 @@ public class Input {
 
     List<String> getTags() {
         List<String> list = new ArrayList<>();
-        for (int i = 31; i < 41; i++) {
+        for (int i = 51; i < 61; i++) {
             list.add("300F 4FB7 3AD0 01C0 8369 A" + i);
         }
 //        for (int i = 30; i < 50; i++) {
